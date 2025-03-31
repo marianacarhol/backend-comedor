@@ -13,107 +13,105 @@ exports.deleteProduct = exports.modifyProduct = exports.getProductById = exports
 const product_1 = require("../models/product");
 // Create and Save a new Product
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //Validate request
     if (!req.body) {
-        return res.status(400).json({
+        res.status(400).json({
             status: "error",
             message: "Content can not be empty",
             payload: null,
         });
+        return;
     }
-    // Save Product in the database
-    const product = Object.assign({}, req.body);
-    product_1.Product.create(product)
-        .then((data) => {
+    try {
+        const product = Object.assign({}, req.body);
+        const data = yield product_1.Product.create(product);
         res.status(200).json({
             status: "success",
             message: "Product successfully created",
             payload: data,
         });
-    })
-        .catch((err) => {
+    }
+    catch (err) {
         res.status(500).json({
             status: "error",
             message: "Something happened creating a product. " + err.message,
             payload: null,
         });
-    });
+    }
 });
 exports.createProduct = createProduct;
 // Retrieve all Products from the database.
-const getAllProducts = (req, res) => {
-    //Calling the Sequelize findAll method. This is the same that a SELECT * FROM PRODUCT in a SQL query.
-    product_1.Product.findAll()
-        .then((data) => {
-        return res.status(200).json({
+const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield product_1.Product.findAll();
+        res.status(200).json({
             status: "success",
             message: "Products successfully retrieved",
             payload: data,
         });
-    })
-        .catch((err) => {
-        return res.status(500).json({
+    }
+    catch (err) {
+        res.status(500).json({
             status: "error",
             message: "Something happened retrieving all products. " + err.message,
             payload: null,
         });
-    });
-};
+    }
+});
 exports.getAllProducts = getAllProducts;
 // Find a single Product with an id
-const getProductById = (req, res) => {
-    product_1.Product.findByPk(req.params.id)
-        .then((data) => {
-        return res.status(200).json({
+const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield product_1.Product.findByPk(req.params.id);
+        res.status(200).json({
             status: "success",
-            message: "Products successfully retrieved",
+            message: "Product successfully retrieved",
             payload: data,
         });
-    })
-        .catch((err) => {
-        return res.status(500).json({
+    }
+    catch (err) {
+        res.status(500).json({
             status: "error",
-            message: "Something happened retrieving all products. " + err.message,
+            message: "Something happened retrieving the product. " + err.message,
             payload: null,
         });
-    });
-};
+    }
+});
 exports.getProductById = getProductById;
 // Update a Product by the id in the request
 const modifyProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // Validate request
     if (!req.body) {
-        return res.status(400).json({
+        res.status(400).json({
             status: "error",
             message: "Content can not be empty.",
             payload: null,
         });
+        return;
     }
-    // Save Product in the database
-    product_1.Product.update(Object.assign({}, req.body), { where: { id: req.params.id } })
-        .then((isUpdated) => {
-        if (isUpdated) {
-            return res.status(200).json({
+    try {
+        // Product.update devuelve un array, donde la primera posición es la cantidad de filas actualizadas.
+        const [updated] = yield product_1.Product.update(Object.assign({}, req.body), { where: { id: req.params.id } });
+        if (updated) {
+            res.status(200).json({
                 status: "success",
                 message: "Product successfully updated",
                 payload: Object.assign({}, req.body),
             });
         }
         else {
-            return res.status(500).json({
+            res.status(500).json({
                 status: "error",
-                message: "Something happened updating the product. ",
+                message: "Something happened updating the product.",
                 payload: null,
             });
         }
-    })
-        .catch((err) => {
+    }
+    catch (err) {
         res.status(500).json({
             status: "error",
             message: "Something happened updating a product. " + err.message,
             payload: null,
         });
-    });
+    }
 });
 exports.modifyProduct = modifyProduct;
 // Delete a Product with the specified id in the request
@@ -121,12 +119,12 @@ const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     const { id } = req.body;
     try {
         yield product_1.Product.destroy({ where: { id } });
-        return res.status(200).json({ message: "Product deleted" });
+        res.status(200).json({ message: "Product deleted" });
     }
     catch (error) {
-        return res.status(500).json({
-            message: "Error deleting products",
-            error,
+        res.status(500).json({
+            message: "Error deleting product",
+            error: error.message || error,
         });
     }
 });
