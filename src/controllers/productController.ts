@@ -115,8 +115,4 @@ export const deleteProduct: RequestHandler = async (req: Request, res: Response)
       error: error.message || error,
     });
   }
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 95ee5e0d42d03699c7cb532f295c1626121d7ffc
