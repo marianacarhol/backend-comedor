@@ -1,16 +1,17 @@
 import { Sequelize } from "sequelize-typescript";
 import { Product } from "../src/models/product";
+import { ProductType } from "../src/models/productType";
 
 const connection = new Sequelize({
     database: 'sisweb_db',
     dialect: 'mysql',
     username: 'sisweb_user',
-    password: '12345',
+    password: '123456',
     host: 'localhost',
     port: 3306,
     //storage: ':memory:',
     models: [
-        Product
+        Product, ProductType
     ]
 });
 

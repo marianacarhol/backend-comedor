@@ -1,10 +1,12 @@
-import {Table, Model, Column, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+import {Table, Model, Column, CreatedAt, UpdatedAt, ForeignKey, BelongsTo} from 'sequelize-typescript';
 import {Optional} from 'sequelize';
+import { ProductType } from './productType';
 
 interface ProductAttributes{
   id: number;
   nombre: string;
-  cantidad: number ;
+  cantidad: number;
+  productTypeId: number;
 }
 
 interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'>{}
@@ -29,4 +31,11 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
    @UpdatedAt
    @Column
    updatedAt!: Date;
+
+   @ForeignKey(() => ProductType)
+   @Column
+   productTypeId!: number;
+
+   @BelongsTo(() => ProductType, { onDelete: 'CASCADE' })
+   productType!: ProductType;
 }
