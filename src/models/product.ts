@@ -1,10 +1,11 @@
-import {Table, Model, Column, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+import {Table, Model, Column, CreatedAt, HasMany, UpdatedAt} from 'sequelize-typescript';
 import {Optional} from 'sequelize';
+import { Donation } from '../models/donation';
 
 interface ProductAttributes{
   id: number;
   nombre: string;
-  cantidad: number ;
+  cantidad: number;
 }
 
 interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'>{}
@@ -21,6 +22,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
 
    @Column
    cantidad!: number;
+   
+   @HasMany(() => Donation)
+   donaciones?: Donation[];
 
    @CreatedAt
    @Column

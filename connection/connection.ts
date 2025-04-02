@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import { Product } from "../src/models/product";
+import { Person } from "../src/models/person";
+import { Donation } from "../src/models/donation";
 
 const connection = new Sequelize({
     database: 'sisweb_db',
@@ -10,7 +12,9 @@ const connection = new Sequelize({
     port: 3306,
     //storage: ':memory:',
     models: [
-        Product
+        Product,
+        Person,
+        Donation
     ]
 });
 
