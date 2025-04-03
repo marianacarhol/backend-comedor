@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lusitana:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    margin: 0;
+    min-height: 100vh;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.tables {
+    display: flex;
+    justify-content: center;
+}
+
+th, td {
+    border: 1px solid #000;
+    padding: 8px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem;
+    background-color: #fa8d2e;
+}
+
+.logo {
+    display: flex;
+    color: #ffffff;
+    font-size: 31px;
+    text-transform: uppercase;
+    padding-left: 1.5%;
+    font-family: 'Lusitana', sans-serif;
+}
+
+.titulo{
+    text-transform: uppercase;
+    font-size: 33px;
+}
+
+ul {
+    display: flex;
+    list-style: none; 
+    gap: 70px;
+    padding-right: 1.5%;
+}
+
+li:hover{
+    text-decoration: underline;
+    text-decoration-color: white;
+    cursor: pointer;
+}
+
+a {
+    text-decoration:none;
+    color: white;
+    font-size: 28px;
+    font-family: 'Lusitana', sans-serif;
+}
+
+#cerrarsesion { 
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    padding: 7px 15px 7px 15px;
+}
+
+#cerrarsesion:hover { 
+    background-color: #ffffff; 
+    color: #fa8d2e;           
+    cursor: pointer; 
+}

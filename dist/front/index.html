@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corazón Contento</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<header>
+  <nav>
+      <div class="logo">Corazon contento</div>
+      <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#"> Inventario </a></li>
+          <li><a href="#"> Configuración </a></li>
+          <li><a href="#"> Cerrar sesión </a></li>
+      </ul>
+  </nav>
+</header>
+
+  <body>
+  <h2>Productos</h2>
+
+  <div class="tables">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody id="product-list">
+    </tbody>
+  </table>
+  </div>
+  
+  <h2>Tipos de Productos</h2>
+
+  <div class="tables">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+      </tr>
+    </thead>
+    <tbody id="productTypes-list">
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Donaciones</h2>
+
+  <div class="tables">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>PersonId</th>
+        <th>ProductId</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody id="donations-list">
+    </tbody>
+  </table>
+  </div>
+  
+  <h2>Personas</h2>
+  
+<div class="tables">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Rol</th>
+      </tr>
+    </thead>
+    <tbody id="people-list">
+    </tbody>
+  </table>
+</div>
+
+  <script>
+    // Fetch products from the server and display them
+    fetch('/products-json') // Route to get products as JSON
+      .then(response => response.json())
+      .then(data => {
+        const productList = document.getElementById('product-list');
+        data.forEach(product => {
+          const row = document.createElement('tr');
+          
+          const td_id = document.createElement('td');
+          td_id.textContent = `${product.id}`;
+          row.appendChild(td_id);
+          
+          const td_nombre = document.createElement('td');
+          td_nombre.textContent = ` ${product.nombre}`;
+          row.appendChild(td_nombre);
+
+          const td_cantidad = document.createElement('td');
+          td_cantidad.textContent = ` ${product.cantidad}`;
+          row.appendChild(td_cantidad);
+          
+          productList.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching products:', error));
+
+      
+    // Fetch productTypes from the server and display them
+    fetch('/productTypes-json') // Route to get productTypes as JSON
+      .then(response => response.json())
+      .then(data => {
+        const productTypeList = document.getElementById('productTypes-list');
+        data.forEach(productType => {
+          const row = document.createElement('tr');
+          
+          const td_id = document.createElement('td');
+          td_id.textContent = `${productType.id}`;
+          row.appendChild(td_id);
+          
+          const td_nombre = document.createElement('td');
+          td_nombre.textContent = ` ${productType.nombre}`;
+          row.appendChild(td_nombre);
+          
+          productTypeList.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching product types:', error));
+
+      
+    // Fetch all donation information from the server and display them
+    fetch('/donations-json') // Route to get donations as JSON
+      .then(response => response.json())
+      .then(data => {
+        const donationsList = document.getElementById('donations-list');
+        data.forEach(donation => {
+          const row = document.createElement('tr');
+          
+          const td_id = document.createElement('td');
+          td_id.textContent = `${donation.id}`;
+          row.appendChild(td_id);
+          
+          const td_personId = document.createElement('td');
+          td_personId.textContent = ` ${donation.personId}`;
+          row.appendChild(td_personId);
+
+          const td_productId = document.createElement('td');
+          td_productId.textContent = ` ${donation.productId}`;
+          row.appendChild(td_productId);
+
+          const td_cantidad = document.createElement('td');
+          td_cantidad.textContent = ` ${donation.cantidad}`;
+          row.appendChild(td_cantidad);
+          
+          donationsList.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching donations:', error));
+
+      
+    // Fetch person from the server and display them
+    fetch('/people-json') // Route to get people as JSON
+      .then(response => response.json())
+      .then(data => {
+        const peopleList = document.getElementById('people-list');
+        data.forEach(person => {
+          const row = document.createElement('tr');
+          
+          const td_id = document.createElement('td');
+          td_id.textContent = `${person.id}`;
+          row.appendChild(td_id);
+          
+          const td_nombre = document.createElement('td');
+          td_nombre.textContent = ` ${person.nombre}`;
+          row.appendChild(td_nombre);
+
+          const td_rol = document.createElement('td');
+          td_rol.textContent = ` ${person.rol}`;
+          row.appendChild(td_rol);
+          
+          peopleList.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching people:', error));
+
+  </script>
+</body>
+</html>
