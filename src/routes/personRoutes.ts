@@ -17,6 +17,6 @@ personRouter.post('/', createPerson);
 
 personRouter.patch('/:id', modifyPerson);
 
-personRouter.delete('/', deletePerson);
+personRouter.delete('/:id', deletePerson);
 
 export default personRouter;

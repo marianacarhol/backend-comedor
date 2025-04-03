@@ -11,17 +11,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
 const product_1 = require("../src/models/product");
+const person_1 = require("../src/models/person");
+const donation_1 = require("../src/models/donation");
 const productType_1 = require("../src/models/productType");
 const connection = new sequelize_typescript_1.Sequelize({
     database: 'sisweb_db',
     dialect: 'mysql',
     username: 'sisweb_user',
-    password: '123456',
+    password: '12345',
     host: 'localhost',
     port: 3306,
     //storage: ':memory:',
     models: [
-        product_1.Product, productType_1.ProductType
+        product_1.Product,
+        person_1.Person,
+        donation_1.Donation,
+        productType_1.ProductType
     ]
 });
 function connectionDB() {

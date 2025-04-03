@@ -1,5 +1,6 @@
 import { RequestHandler, Request, Response } from "express";
 import { Person } from "../models/person";
+import { Donation } from "../models/donation";
 
 
 // Create and Save a new Person
@@ -34,7 +35,7 @@ export const createPerson: RequestHandler = async (req: Request, res: Response):
 // Retrieve all People from the database.
 export const getAllPerson: RequestHandler = async (req: Request, res: Response): Promise<void> => {
   try {
-    const data = await Person.findAll();
+    const data = await Person.findAll({include: [Donation]});
     res.status(200).json({
       status: "success",
       message: "All people successfully retrieved",
@@ -52,7 +53,7 @@ export const getAllPerson: RequestHandler = async (req: Request, res: Response):
 // Find a single Person with an id
 export const getPersonById: RequestHandler = async (req: Request, res: Response): Promise<void> => {
   try {
-    const data: Person | null = await Person.findByPk(req.params.id);
+    const data: Person | null = await Person.findByPk(req.params.id, {include: [Donation]});
     res.status(200).json({
       status: "success",
       message: "Person successfully retrieved",

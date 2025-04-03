@@ -1,4 +1,4 @@
-import {Table, Model, Column, HasMany} from 'sequelize-typescript';
+import {Table, Model, Column, HasMany, UpdatedAt, CreatedAt} from 'sequelize-typescript';
 import {Optional} from 'sequelize';
 import { Product } from "../models/product";
 
@@ -19,7 +19,14 @@ export class ProductType extends Model<ProductTypeAttributes, ProductTypeCreatio
    @Column
    nombre!: string;
 
-   @HasMany(() => Product)
+   @HasMany(() => Product, { onDelete: 'CASCADE' })
    products!: Product[];
    
+   @CreatedAt
+   @Column
+   createdAt!: Date;
+    
+   @UpdatedAt
+   @Column
+   updatedAt!: Date;
 }

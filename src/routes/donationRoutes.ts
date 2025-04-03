@@ -17,6 +17,6 @@ donationRouter.post('/', createDonation);
 
 donationRouter.patch('/:id', modifyDonation);
 
-donationRouter.delete('/', deleteDonation);
+donationRouter.delete('/:id', deleteDonation);
 
 export default donationRouter;

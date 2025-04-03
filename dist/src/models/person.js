@@ -9,32 +9,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductType = void 0;
+exports.Person = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-const product_1 = require("../models/product");
-let ProductType = class ProductType extends sequelize_typescript_1.Model {
+const donation_1 = require("../models/donation"); //Tabla intermedia
+let Person = class Person extends sequelize_typescript_1.Model {
 };
-exports.ProductType = ProductType;
+exports.Person = Person;
 __decorate([
     sequelize_typescript_1.Column,
     __metadata("design:type", String)
-], ProductType.prototype, "nombre", void 0);
+], Person.prototype, "nombre", void 0);
 __decorate([
-    (0, sequelize_typescript_1.HasMany)(() => product_1.Product, { onDelete: 'CASCADE' }),
+    sequelize_typescript_1.Column,
+    __metadata("design:type", Number)
+], Person.prototype, "rol", void 0);
+__decorate([
+    (0, sequelize_typescript_1.HasMany)(() => donation_1.Donation, { onDelete: 'CASCADE' }),
     __metadata("design:type", Array)
-], ProductType.prototype, "products", void 0);
+], Person.prototype, "donaciones", void 0);
 __decorate([
     sequelize_typescript_1.CreatedAt,
     sequelize_typescript_1.Column,
     __metadata("design:type", Date)
-], ProductType.prototype, "createdAt", void 0);
+], Person.prototype, "createdAt", void 0);
 __decorate([
     sequelize_typescript_1.UpdatedAt,
     sequelize_typescript_1.Column,
     __metadata("design:type", Date)
-], ProductType.prototype, "updatedAt", void 0);
-exports.ProductType = ProductType = __decorate([
+], Person.prototype, "updatedAt", void 0);
+exports.Person = Person = __decorate([
     (0, sequelize_typescript_1.Table)({
-        tableName: "ProductTypes"
+        tableName: "Person"
     })
-], ProductType);
+], Person);

@@ -21,7 +21,7 @@ export class Person extends Model<PersonAttributes, PersonCreationAttributes>{
    @Column
    rol!: number;
 
-   @HasMany(() => Donation)
+   @HasMany(() => Donation, { onDelete: 'CASCADE' })
    donaciones?: Donation[];
 
    @CreatedAt

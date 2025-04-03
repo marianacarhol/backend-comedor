@@ -25,8 +25,15 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
    @Column
    cantidad!: number;
    
-   @HasMany(() => Donation)
+   @HasMany(() => Donation, { onDelete: 'CASCADE' })
    donaciones?: Donation[];
+
+   @ForeignKey(() => ProductType)
+   @Column
+   productTypeId!: number;
+
+   @BelongsTo(() => ProductType, { onDelete: 'CASCADE' })
+   productType!: ProductType;
 
    @CreatedAt
    @Column
@@ -35,11 +42,4 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
    @UpdatedAt
    @Column
    updatedAt!: Date;
-
-   @ForeignKey(() => ProductType)
-   @Column
-   productTypeId!: number;
-
-   @BelongsTo(() => ProductType, { onDelete: 'CASCADE' })
-   productType!: ProductType;
 }
