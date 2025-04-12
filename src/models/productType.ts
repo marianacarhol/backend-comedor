@@ -1,32 +1,32 @@
-import {Table, Model, Column, HasMany, UpdatedAt, CreatedAt} from 'sequelize-typescript';
-import {Optional} from 'sequelize';
-import { Product } from "../models/product";
+import { Table, Model, Column, HasMany, UpdatedAt, CreatedAt } from 'sequelize-typescript';
+import { Optional } from 'sequelize';
+import { Product } from "./product";
 
-interface ProductTypeAttributes{
+interface ProductTypeAttributes {
   id: number;
   nombre: string;
 }
 
-interface ProductTypeCreationAttributes extends Optional<ProductTypeAttributes, 'id'>{}
+interface ProductTypeCreationAttributes extends Optional<ProductTypeAttributes, 'id'> { }
 
-@Table ({
+@Table({
   tableName: "ProductTypes"
 })
-export class ProductType extends Model<ProductTypeAttributes, ProductTypeCreationAttributes>{
+export class ProductType extends Model<ProductTypeAttributes, ProductTypeCreationAttributes> {
 
   // Here, TS infers Data Type from the JS Type
   // The ! means that the variable title wont be null or undefine. 
-   @Column
-   nombre!: string;
+  @Column
+  nombre!: string;
 
-   @HasMany(() => Product, { onDelete: 'CASCADE' })
-   products!: Product[];
-   
-   @CreatedAt
-   @Column
-   createdAt!: Date;
-    
-   @UpdatedAt
-   @Column
-   updatedAt!: Date;
+  @HasMany(() => Product, { onDelete: 'CASCADE' })
+  products!: Product[];
+
+  @CreatedAt
+  @Column
+  createdAt!: Date;
+
+  @UpdatedAt
+  @Column
+  updatedAt!: Date;
 }

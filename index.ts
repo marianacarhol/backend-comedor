@@ -3,17 +3,20 @@ import apiRouter from './src/routes';
 import connectionDB from './connection/connection';
 import path from 'path';
 
+
 import { Product } from './src/models/product';
 import { Person } from './src/models/person';
 import { Donation } from "./src/models/donation";
 import { ProductType } from './src/models/productType'
 
+const cors = require('cors')
 const morgan = require('morgan');
 const app: Express = express();
 const port = 3000;
 
 app.use(express.static('dist/front')); //changes to static files
 
+app.use(cors({ origin: true }));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(apiRouter);

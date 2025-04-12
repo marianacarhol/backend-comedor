@@ -17,7 +17,8 @@ const connection = new Sequelize({
         Person,
         Donation,
         ProductType
-    ]
+    ],
+    logging: console.log,
 });
 
 async function connectionDB(){

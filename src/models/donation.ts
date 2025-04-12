@@ -1,17 +1,17 @@
 import { Table, Model, Column, CreatedAt, UpdatedAt, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Optional } from 'sequelize';
-import { Person } from '../models/person';
-import { Product } from '../models/product';
+import { Person } from './person';
+import { Product } from './product';
 
 interface DonationAttributes {
-    id : number;
-    personId : number;
+    id: number;
+    personId: number;
     productId: number;
     cantidad: number;
     fecha: Date;
 }
 
-interface DonationCreationAttributes extends Optional<DonationAttributes, 'id'> {}
+interface DonationCreationAttributes extends Optional<DonationAttributes, 'id'> { }
 
 @Table({
     tableName: 'Donations'

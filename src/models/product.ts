@@ -1,45 +1,45 @@
-import {Table, Model, Column, CreatedAt, UpdatedAt, ForeignKey, BelongsTo, HasMany} from 'sequelize-typescript';
-import {Optional} from 'sequelize';
-import { Donation } from '../models/donation';
+import { Table, Model, Column, CreatedAt, UpdatedAt, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
+import { Optional } from 'sequelize';
+import { Donation } from './donation';
 import { ProductType } from './productType';
 
-interface ProductAttributes{
+interface ProductAttributes {
   id: number;
   nombre: string;
   cantidad: number;
   productTypeId: number;
 }
 
-interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'>{}
+interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> { }
 
-@Table ({
+@Table({
   tableName: "Products"
 })
-export class Product extends Model<ProductAttributes, ProductCreationAttributes>{
+export class Product extends Model<ProductAttributes, ProductCreationAttributes> {
 
   // Here, TS infers Data Type from the JS Type
   // The ! means that the variable title wont be null or undefine. 
-   @Column
-   nombre!: string;
+  @Column
+  nombre!: string;
 
-   @Column
-   cantidad!: number;
-   
-   @HasMany(() => Donation, { onDelete: 'CASCADE' })
-   donaciones?: Donation[];
+  @Column
+  cantidad!: number;
 
-   @ForeignKey(() => ProductType)
-   @Column
-   productTypeId!: number;
+  @HasMany(() => Donation, { onDelete: 'CASCADE' })
+  donaciones?: Donation[];
 
-   @BelongsTo(() => ProductType, { onDelete: 'CASCADE' })
-   productType!: ProductType;
+  @ForeignKey(() => ProductType)
+  @Column
+  productTypeId!: number;
 
-   @CreatedAt
-   @Column
-   createdAt!: Date;
- 
-   @UpdatedAt
-   @Column
-   updatedAt!: Date;
+  @BelongsTo(() => ProductType, { onDelete: 'CASCADE' })
+  productType!: ProductType;
+
+  @CreatedAt
+  @Column
+  createdAt!: Date;
+
+  @UpdatedAt
+  @Column
+  updatedAt!: Date;
 }

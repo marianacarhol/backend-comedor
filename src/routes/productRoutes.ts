@@ -17,6 +17,10 @@ productRouter.post('/', createProduct);
 
 productRouter.patch('/:id', modifyProduct);
 
-productRouter.delete('/:id', deleteProduct);
+productRouter.delete('/:id', (req, res) => {
+  console.log("DELETE route reached with ID:", req.params.id);
+  res.status(200).json({ message: `Delete route working! ID: ${req.params.id}` });
+});
+
 
 export default productRouter;

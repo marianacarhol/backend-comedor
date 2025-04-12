@@ -1,34 +1,34 @@
-import {Table, Model, Column, CreatedAt, UpdatedAt, HasMany} from 'sequelize-typescript';
-import {Optional} from 'sequelize';
-import {Donation} from '../models/donation' //Tabla intermedia
+import { Table, Model, Column, CreatedAt, UpdatedAt, HasMany } from 'sequelize-typescript';
+import { Optional } from 'sequelize';
+import { Donation } from './donation' //Tabla intermedia
 
-interface PersonAttributes{
+interface PersonAttributes {
   id: number;
   nombre: string;
   rol: boolean; //true = donador, false = consumidor
 }
 
-interface PersonCreationAttributes extends Optional<PersonAttributes, 'id'>{}
+interface PersonCreationAttributes extends Optional<PersonAttributes, 'id'> { }
 
-@Table ({
+@Table({
   tableName: "Person"
 })
-export class Person extends Model<PersonAttributes, PersonCreationAttributes>{
+export class Person extends Model<PersonAttributes, PersonCreationAttributes> {
 
-   @Column
-   nombre!: string;
+  @Column
+  nombre!: string;
 
-   @Column
-   rol!: number;
+  @Column
+  rol!: number;
 
-   @HasMany(() => Donation, { onDelete: 'CASCADE' })
-   donaciones?: Donation[];
+  @HasMany(() => Donation, { onDelete: 'CASCADE' })
+  donaciones?: Donation[];
 
-   @CreatedAt
-   @Column
-   createdAt!: Date;
- 
-   @UpdatedAt
-   @Column
-   updatedAt!: Date;
+  @CreatedAt
+  @Column
+  createdAt!: Date;
+
+  @UpdatedAt
+  @Column
+  updatedAt!: Date;
 }

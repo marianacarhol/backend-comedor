@@ -105,7 +105,12 @@ export const modifyProduct: RequestHandler = async (req: Request, res: Response)
 
 // Delete a Product with the specified id in the request
 export const deleteProduct: RequestHandler = async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.body;
+  console.log("Route hit successfully!");
+
+  const { id } = req.params;
+  console.log("Received params:", req.params);
+  console.log("Extracted ID:", id);
+
   try {
     await Product.destroy({ where: { id } });
     res.status(200).json({ message: "Product deleted" });

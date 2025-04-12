@@ -20,10 +20,12 @@ const product_1 = require("./src/models/product");
 const person_1 = require("./src/models/person");
 const donation_1 = require("./src/models/donation");
 const productType_1 = require("./src/models/productType");
+const cors = require('cors');
 const morgan = require('morgan');
 const app = (0, express_1.default)();
 const port = 3000;
 app.use(express_1.default.static('dist/front')); //changes to static files
+app.use(cors({ origin: true }));
 app.use(morgan('dev'));
 app.use(express_1.default.json());
 app.use(routes_1.default);
